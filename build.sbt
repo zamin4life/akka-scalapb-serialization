@@ -23,7 +23,7 @@ PB.targets in Compile := Seq(
 // Make protos from some Jar available to import.
 libraryDependencies ++= Seq(
   "com.google.protobuf" % "protobuf-java" % "3.1.0" % "protobuf",
-  "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.5.47"
+  "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.5.47" % "protobuf"
 )
 
 releaseProcess := Seq[ReleaseStep](

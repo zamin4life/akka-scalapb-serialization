@@ -1,7 +1,5 @@
-import com.trueaccord.scalapb.{ScalaPbPlugin => PB}
 import sbtrelease._
 import ReleaseStateTransformations._
-import com.typesafe.sbt.pgp.PgpKeys._
 
 scalaVersion := "2.11.7"
 
@@ -10,21 +8,23 @@ organization := "im.actor"
 organizationName := "Actor LLC"
 organizationHomepage := Some(new URL("https://actor.im/"))
 
-PB.protobufSettings
-
-PB.runProtoc in PB.protobufConfig := (args => com.github.os72.protocjar.Protoc.runProtoc("-v300" +: args.toArray))
-
-val akkaV = "2.4.2-RC1"
+val akkaV = "2.4.7"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaV,
-  "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.5.21",
+  "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.5.47",
   "com.github.ben-manes.caffeine" % "caffeine" % "1.2.0"
 )
 
-dependencyOverrides ~= { overrides => 
-  overrides + "com.google.protobuf" % "protobuf-java" % "3.0.0-beta-2" 
-}
+PB.targets in Compile := Seq(
+  scalapb.gen() -> (sourceManaged in Compile).value
+)
+
+// Make protos from some Jar available to import.
+libraryDependencies ++= Seq(
+  "com.google.protobuf" % "protobuf-java" % "3.1.0" % "protobuf",
+  "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.5.47"
+)
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,

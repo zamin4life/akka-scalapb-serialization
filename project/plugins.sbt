@@ -1,6 +1,6 @@
-addSbtPlugin("com.trueaccord.scalapb" % "sbt-scalapb" % "0.5.21")
+addSbtPlugin("com.thesamet" % "sbt-protoc" % "0.99.6")
 
-libraryDependencies ++= Seq("com.github.os72" % "protoc-jar" % "3.0.0-b2")
+libraryDependencies += "com.trueaccord.scalapb" %% "compilerplugin" % "0.5.47"
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "0.5.1")
 

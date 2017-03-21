@@ -1,7 +1,7 @@
 import sbtrelease._
 import ReleaseStateTransformations._
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
 name := "akka-scalapb-serialization"
 organization := "im.actor"

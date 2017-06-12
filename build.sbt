@@ -1,14 +1,14 @@
 import sbtrelease._
 import ReleaseStateTransformations._
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.11"
 
 name := "akka-scalapb-serialization"
 organization := "im.actor"
 organizationName := "Actor LLC"
 organizationHomepage := Some(new URL("https://actor.im/"))
 
-val akkaV = "2.4.7"
+val akkaV = "2.4.11.2"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaV,

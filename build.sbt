@@ -8,7 +8,7 @@ organization := "im.actor"
 organizationName := "Actor LLC"
 organizationHomepage := Some(new URL("https://actor.im/"))
 
-val akkaV = "2.5.2"
+val akkaV = "2.4.19"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaV,

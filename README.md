@@ -1,0 +1,1 @@
+# akka-scalapb-serialization

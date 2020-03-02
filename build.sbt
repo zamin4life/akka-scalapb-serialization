@@ -12,8 +12,7 @@ val akkaV = "2.4.19"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaV,
-  "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.5.47",
-  "com.github.ben-manes.caffeine" % "caffeine" % "1.2.0"
+  "com.github.ben-manes.caffeine" % "caffeine" % "2.2.7"
 )
 
 PB.targets in Compile := Seq(
@@ -23,7 +22,7 @@ PB.targets in Compile := Seq(
 // Make protos from some Jar available to import.
 libraryDependencies ++= Seq(
   "com.google.protobuf" % "protobuf-java" % "3.1.0" % "protobuf",
-  "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.5.47" % "protobuf"
+  "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf"
 )
 
 releaseProcess := Seq[ReleaseStep](

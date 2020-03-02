@@ -2,10 +2,10 @@ package im.actor.serialization
 
 import akka.serialization._
 import com.github.benmanes.caffeine.cache.Caffeine
-import com.google.protobuf.{ ByteString, GeneratedMessage ⇒ GGeneratedMessage }
-import com.trueaccord.scalapb.GeneratedMessage
+import com.google.protobuf.{ByteString, GeneratedMessage => GGeneratedMessage}
+import scalapb.GeneratedMessage
 
-import scala.util.{ Failure, Success }
+import scala.util.{Failure, Success}
 
 object ActorSerializer {
   private val ARRAY_OF_BYTE_ARRAY = Array[Class[_]](classOf[Array[Byte]])
@@ -50,8 +50,8 @@ object ActorSerializer {
         clazz
           .getDeclaredMethod("validate", ARRAY_OF_BYTE_ARRAY: _*)
           .invoke(field, message.bytes.toByteArray) match {
-          case Success(msg) ⇒ msg.asInstanceOf[GeneratedMessage]
-          case Failure(e)   ⇒ throw e
+          case Success(msg) ⇒ msg.asInstanceOf[GeneratedMessage].asInstanceOf[AnyRef]
+          case Failure(e) ⇒ throw e
         }
       case None ⇒ throw new IllegalArgumentException(s"Can't find mapping for id: ${message.id}")
     }
@@ -63,9 +63,9 @@ object ActorSerializer {
     ActorSerializer.get(o.getClass) match {
       case Some(id) ⇒
         o match {
-          case m: GeneratedMessage  ⇒ SerializedMessage(id, ByteString.copyFrom(m.toByteArray))
+          case m: GeneratedMessage ⇒ SerializedMessage(id, ByteString.copyFrom(m.toByteArray))
           case m: GGeneratedMessage ⇒ SerializedMessage(id, ByteString.copyFrom(m.toByteArray))
-          case _                    ⇒ throw new IllegalArgumentException(s"Can't serialize non-scalapb message [${o}]")
+          case _ ⇒ throw new IllegalArgumentException(s"Can't serialize non-scalapb message [${o}]")
         }
       case None ⇒
         throw new IllegalArgumentException(s"Can't find mapping for message [${o}]")
